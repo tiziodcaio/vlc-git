@@ -1,4 +1,5 @@
-# Maintainer: Andrew Crerar <crerar@archlinux.org>
+# Maintainer: Daniele Basso <d dot bass05 at proton dot me>
+# Contributor: Andrew Crerar <crerar@archlinux.org>
 # Contributor: Rob McCathie <korrode at gmail>
 # Contributor: Giovanni Scafora <giovanni@archlinux.org>
 # Contributor: Sarah Hay <sarahhay@mb.sympatico.ca>
