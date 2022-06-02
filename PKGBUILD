@@ -124,7 +124,8 @@ prepare() {
 build() {
   cd "${srcdir}/${_name}"
 
-  export LUA_LIBS="$(pkg-config --libs lua)"
+  export LUAC=/usr/bin/luac52
+  export LUA_LIBS="$(pkg-config --libs lua52)"
 
   ./configure --prefix=/usr \
               --sysconfdir=/etc \
