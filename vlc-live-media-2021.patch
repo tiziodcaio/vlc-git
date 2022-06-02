@@ -1,6 +1,6 @@
-diff -ru vlc-3.0.13.orig/configure.ac vlc-3.0.13/configure.ac
---- vlc-3.0.13.orig/configure.ac        2021-04-27 15:18:39.000000000 +0200
-+++ vlc-3.0.13/configure.ac     2021-05-03 16:26:26.691200904 +0200
+diff -ru a/configure.ac b/configure.ac
+--- a/configure.ac        2021-04-27 15:18:39.000000000 +0200
++++ b/configure.ac     2021-05-03 16:26:26.691200904 +0200
 @@ -1825,7 +1825,7 @@
          AC_MSG_ERROR([Update live555 or pass --disable-live555 to disable RTSP input support.])
        ])
@@ -10,17 +10,36 @@ diff -ru vlc-3.0.13.orig/configure.ac vlc-3.0.13/configure.ac
        other_libs_pic="-lgroupsock_pic -lBasicUsageEnvironment_pic -lUsageEnvironment_pic"
        AS_IF([test "${SYS}" = "mingw32"], [
          # add ws2_32 for closesocket, select, recv
-diff -ru vlc-3.0.13.orig/modules/access/live555.cpp vlc-3.0.13/modules/access/live555.cpp
---- vlc-3.0.13.orig/modules/access/live555.cpp	2019-03-29 20:01:15.000000000 +0100
-+++ vlc-3.0.13/modules/access/live555.cpp	2021-05-03 16:04:38.030121796 +0200
-@@ -852,7 +852,9 @@
+
+diff --git a/modules/access/live555.cpp b/modules/access/live555.cpp
+index 01c535ca5b..95e15e35d9 100644
+--- a/modules/access/live555.cpp
++++ b/modules/access/live555.cpp
+@@ -60,6 +60,7 @@
+ #include <liveMedia.hh>
+ #include <liveMedia_version.hh>
+ #include <Base64.hh>
++#include <NetAddress.hh>
+ 
+ extern "C" {
+ #include "../access/mms/asf.h"  /* Who said ugly ? */
+@@ -727,7 +728,8 @@ static int SessionsSetup( demux_t *p_demux )
+     unsigned const thresh = 200000; /* RTP reorder threshold .2 second (default .1) */
+     const char     *p_sess_lang = NULL;
+     const char     *p_lang;
+-
++    struct sockaddr_storage addr;
++    
+     b_rtsp_tcp    = var_CreateGetBool( p_demux, "rtsp-tcp" ) ||
+                     var_GetBool( p_demux, "rtsp-http" );
+     i_client_port = var_InheritInteger( p_demux, "rtp-client-port" );
+@@ -850,7 +852,8 @@ static int SessionsSetup( demux_t *p_demux )
              if( !p_sys->b_multicast )
              {
                  /* We need different rollover behaviour for multicast */
 -                p_sys->b_multicast = IsMulticastAddress( sub->connectionEndpointAddress() );
-+                struct sockaddr_storage tempAddr;
-+                sub->getConnectionEndpointAddress(tempAddr);
-+                p_sys->b_multicast = IsMulticastAddress( tempAddr );
++                sub->getConnectionEndpointAddress(addr);
++                p_sys->b_multicast = IsMulticastAddress( addr );
              }
  
              tk = (live_track_t*)malloc( sizeof( live_track_t ) );
