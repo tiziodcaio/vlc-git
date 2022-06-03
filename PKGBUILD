@@ -31,7 +31,7 @@ makedepends=('gst-plugins-base-libs' 'live-media' 'libnotify' 'libbluray'
              'libdvdread' 'libdvdnav' 'libogg' 'libshout' 'libmodplug' 'libvpx'
              'libvorbis' 'speex' 'opus' 'libtheora' 'libpng' 'libjpeg-turbo'
              'libx265.so' 'libx264.so' 'zvbi' 'libass' 'libkate' 'libtiger'
-             'sdl_image' 'libpulse' 'alsa-lib' 'jack' 'libsamplerate' 'libsoxr'
+             'libpulse' 'alsa-lib' 'jack' 'libsamplerate' 'libsoxr'
              'lirc' 'libgoom2' 'projectm' 'git' 'aom' 'srt'
              'vulkan-headers' 'dav1d' 'flex' 'bison' 'xosd' 'aribb25' 'pcsclite')
 optdepends=('avahi: service discovery using bonjour protocol'
@@ -78,7 +78,6 @@ optdepends=('avahi: service discovery using bonjour protocol'
             'libass: Subtitle support'
             'libkate: Kate codec'
             'libtiger: Tiger rendering for Kate streams'
-            'sdl_image: SDL image support'
             'aalib: ASCII art video output'
             'libcaca: colored ASCII art video output'
             'libpulse: PulseAudio audio output'
@@ -144,7 +143,6 @@ build() {
               --enable-smbclient \
               --enable-sftp \
               --enable-nfs \
-              --enable-realrtsp \
               --enable-dvbpsi \
               --enable-gme \
               --enable-ogg \
@@ -182,14 +180,12 @@ build() {
               --enable-tiger \
               --enable-vdpau \
               --enable-wayland \
-              --enable-sdl-image \
               --enable-freetype \
               --enable-fribidi \
               --enable-harfbuzz \
               --enable-fontconfig \
               --enable-svg \
               --enable-svgdec \
-              --enable-aa \
               --enable-caca \
               --enable-pulse \
               --enable-alsa \
