@@ -10,7 +10,7 @@
 # Contributor: MacWolf <macwolf at archlinux dot de>
 
 pkgname=vlc-git
-pkgver=4.0.0.r19633.g0d201c3549
+pkgver=4.0.0.r19654.g77bf795c0d
 pkgrel=1
 pkgdesc="A multi-platform MPEG, VCD/DVD, and DivX player (GIT Version)"
 url='https://www.videolan.org/vlc/'
@@ -123,7 +123,7 @@ prepare() {
 build() {
   cd "${srcdir}/${_name}"
 
-  export LUAC=/usr/bin/luac52
+  export LUAC=/usr/bin/luac5.2
   export LUA_LIBS="$(pkg-config --libs lua52)"
 
   ./configure --prefix=/usr \
